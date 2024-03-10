@@ -4,7 +4,7 @@ FROM quay.io/fedora-ostree-desktops/kinoite:40
 RUN rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Add some basic tools
-RUN rpm-ostree install btop ncdu
+RUN rpm-ostree install btop ncdu restic rclone
 
 # VM stuff
 RUN rpm-ostree install libvirt virt-manager
