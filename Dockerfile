@@ -1,4 +1,22 @@
 FROM quay.io/fedora-ostree-desktops/kinoite:40
 
+# Add rpm-fusion repository - https://rpmfusion.org/Howto/OSTree
+RUN rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
 # Add some basic tools
 RUN rpm-ostree install btop ncdu
+
+# VM stuff
+RUN rpm-ostree install libvirt virt-manager
+
+# Steam [rpm-fusion]
+RUN rpm-ostree install steam
+
+# HW codecs [rpm-fusion]
+RUN rpm-ostree override remove mesa-va-drivers --install mesa-va-drivers-freeworld
+RUN rpm-ostree override remove mesa-vdpau-drivers --install mesa-vdpau-drivers-freeworld
+
+# Tailscale - https://github.com/tailscale/tailscale/issues/6761
+RUN wget https://pkgs.tailscale.com/stable/fedora/tailscale.repo -P /etc/yum.repos.d/
+RUN sed -i 's/repo_gpgcheck=1/repo_gpgcheck=0/' /etc/yum.repos.d/tailscale.repo
+RUN rpm-ostree install tailscale
