@@ -14,7 +14,8 @@ RUN rpm-ostree install steam
 
 # HW codecs [rpm-fusion]
 RUN rpm-ostree override remove mesa-va-drivers --install mesa-va-drivers-freeworld
-RUN rpm-ostree override remove mesa-vdpau-drivers --install mesa-vdpau-drivers-freeworld
+# There is no mesa-vdpau-drivers package installed on kinoite:40
+#RUN rpm-ostree override remove mesa-vdpau-drivers --install mesa-vdpau-drivers-freeworld
 
 # Tailscale - https://github.com/tailscale/tailscale/issues/6761
 RUN wget https://pkgs.tailscale.com/stable/fedora/tailscale.repo -P /etc/yum.repos.d/
