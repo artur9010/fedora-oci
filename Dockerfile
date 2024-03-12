@@ -21,3 +21,6 @@ RUN rpm-ostree override remove mesa-va-drivers --install mesa-va-drivers-freewor
 RUN wget https://pkgs.tailscale.com/stable/fedora/tailscale.repo -P /etc/yum.repos.d/
 RUN sed -i 's/repo_gpgcheck=1/repo_gpgcheck=0/' /etc/yum.repos.d/tailscale.repo
 RUN rpm-ostree install tailscale
+
+# Copy custom configs
+COPY files/ /etc
