@@ -23,4 +23,4 @@ RUN sed -i 's/repo_gpgcheck=1/repo_gpgcheck=0/' /etc/yum.repos.d/tailscale.repo
 RUN rpm-ostree install tailscale
 
 # Copy custom configs
-COPY files/ /etc
+COPY files/etc/ /etc
